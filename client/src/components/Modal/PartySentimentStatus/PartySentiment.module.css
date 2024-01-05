@@ -1,0 +1,108 @@
+.box_analysis{
+    width: 100%;
+    height: auto;
+}
+
+.box_analysis-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+
+    padding: 10px 0;
+    padding-top: 0;
+    box-sizing: border-box;
+    border-bottom: 1px solid #DDDDDD;
+    margin-bottom: 20px;
+
+}
+
+.box_analysis-title > h3{
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.box_analysis-title svg{
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    color: #464E5F;
+}
+
+.box_selected{
+    padding: 10px 0;
+}
+
+.box_selected > h5 {
+    font-size: 14px;
+    color: #464E5F;
+    margin-bottom: 5px;
+}
+
+
+.box_selected > input{
+    height: 44px;
+    width: 100%;
+    background: #F3F6F9;
+    border-radius: 0px;
+    border: none;
+    outline: none;
+}
+
+.box_selected-on > div{
+    height: 44px;
+    width: 100%;
+    background: #F3F6F9;
+    border-radius: 0px;
+    border: none;
+    outline: none;
+}
+
+.box_selected > textarea{
+    height: 100px;
+    width: 100%;
+    background: #F3F6F9;
+    border-radius: 0px;
+    border: none;
+    outline: none;
+}
+
+
+.box_radio{
+    padding: 20px 10px 5px 0;
+    box-sizing: border-box;
+    display: grid;
+    text-align: center;
+}
+
+.confirm-btn{
+    display: grid;
+    margin-top: 20px;
+    place-items: center;
+}
+
+.confirm-btn > button{
+    min-width: 200px;
+    height: 44px;
+    background: #29B171;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.title-add{
+    min-width: 150px;
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: none;
+}
+.title-add > div{
+    margin-left: 10px;
+    color: #3F4254;
+}
+
+.title-add  > svg {
+    font-size: 12px;
+}

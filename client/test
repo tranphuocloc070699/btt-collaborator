@@ -1,0 +1,4 @@
+-- Cảm tình Đảng
++ Khi mà tạo mới cảm tình đảng: member_help,party_awareness_cell, awareness_status_type luôn trả về null khi em đã thêm dữ liệu vào đó
++ Khi tạo cảm tình Đảng thành công em chưa thêm vào Đảng thì danh sách Đảng viên tồn tại dữ liệu từ Cảm tình Đảng ở hàm Get
++ Khi tạo cảm tình Đảng thì em cần dữ liệu theo pro_id để hạn chế call api

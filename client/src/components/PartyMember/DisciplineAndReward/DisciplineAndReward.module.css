@@ -1,0 +1,232 @@
+
+.box_steps{
+    margin: 20px 0;
+}
+
+.box_info-titles{
+    padding: 20px 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.box_info-titles > h3{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.box_info-titles svg{
+    width: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.box-title {
+    display: flex;
+    align-items: center;
+}
+
+.box-title > h5{
+    margin-left: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.steps-items{
+    display: flex;
+    margin: 10px 0;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    align-items: center;
+}
+
+.place_edit{
+    padding: 6px;
+    border-radius: 50%;
+    background: #F3F6F9;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+}
+.place_edit svg{
+    font-size: 10px;
+}
+
+.box-items{
+    margin-bottom: 40px;
+}
+
+/* .steps-items > div:first-child{
+    margin-right: 20px;
+    display: grid;
+    place-items: center;
+    background: #eeecec;
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+} */
+
+.item-round{
+    margin-bottom: 5px;
+}
+
+.place_name{
+    font-size: 13px;
+    font-weight: 600;
+    color: #464E5F;
+}
+
+.place_date{
+    font-size: 13px;
+    color: #80808F;
+}
+
+
+.item-title{
+    font-size: 13px;
+    color: #A1A5B7;
+    font-style: italic;
+}
+
+.title-add{
+    min-width: 150px;
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: none;
+}
+.title-add > div{
+    margin-left: 10px;
+    color: #3F4254;
+}
+
+.title-add  > svg {
+    font-size: 12px;
+}
+
+.box_info-titles{
+    padding: 20px 0;
+    box-sizing: border-box;
+}
+
+.box_info-titles > h3{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.box_selected{
+    padding: 10px 0;
+}
+
+.box_selected > h5 {
+    font-size: 14px;
+    color: #464E5F;
+    margin-bottom: 5px;
+}
+
+.box_selected > input{
+    height: 44px;
+    width: 100%;
+    background: #F3F6F9;
+    border-radius: 0px;
+    border: none;
+    outline: none;
+}
+
+.box_datepiker > div{
+    height: 44px;
+    width: 100%;
+    background: #F3F6F9;
+    border-radius: 0px;
+    border: none;
+    outline: none;
+}
+
+.box_info-number{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 50px;
+}
+
+.box_selected-on > div{
+    height: 44px;
+    width: 100%;
+    
+    border-radius: 0px;
+
+}
+.box_selected-on > div > div{
+    background: #F3F6F9 !important;
+    border: none !important;
+    outline: none !important;  
+}
+
+.box-confirm{
+    margin: 40px 0;
+    display: flex;
+    justify-content: end;
+}
+
+.box_textarea textarea{
+    height: 90px;
+    width: 100%;
+    border-radius: 0px;
+    border: none;
+    outline: none;   
+    background: #F3F6F9;
+}
+
+.box_info-add{
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.box_info-add button{
+    background: #29B171;
+    height: 35px;
+    color: #FFF;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.box_info-table{
+    margin-top: 20px;
+}
+
+.box_info-table tr th{
+    background: #FFF !important;
+}
+.table_title{
+    color: #B5B5C3;
+    font-weight: bold;
+}
+
+.table_tr-sub{
+    font-size: 14px;
+    color: #B5B5C3;
+}
+.table_tr{
+    font-size: 14px;
+}
+
+ /* Table party member css */
+ .colunm_action{
+    display: flex;
+    justify-content: right;
+}
+
+.colunm_action-edit{
+    width: 40px;
+    height: 40px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 5px;
+    color: #29B171;
+    background: #E2FFF1;
+    cursor: pointer;
+}

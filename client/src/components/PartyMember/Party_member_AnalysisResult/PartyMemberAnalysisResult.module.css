@@ -1,0 +1,88 @@
+
+.box_steps{
+    margin: 20px 0;
+}
+
+.box_info-titles{
+    padding: 20px 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.box_info-titles > h3{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.box_info-titles svg{
+    width: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.steps-items{
+    display: flex;
+    margin: 5px 0;
+}
+
+.steps-items > div:first-child{
+   font-weight: bold;
+   color: #3F4254;
+   font-size: 14px;
+}
+
+.item-round{
+    margin: 0 15px;
+}
+
+.item-round{
+    width: 15px;
+    height: 15px;
+    border: 3px solid #29B171;
+    border-radius: 50%;
+}
+
+.item-title{
+    color: #3F4254;
+    font-size: 14px;
+}
+
+.item-border{
+    min-height: 50px;
+    width: 3px;
+    box-sizing: border-box;
+    background: #E5EAEE;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.item-title-sub{
+    font-size: 13px;
+    color: #A1A5B7;
+    font-style: italic;
+}
+
+.title-add{
+    min-width: 150px;
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: none;
+}
+.title-add > div{
+    margin-left: 10px;
+    color: #3F4254;
+}
+
+.title-add  > svg {
+    font-size: 12px;
+}
+
+.item-title svg{
+    font-size: 12px;
+    cursor: pointer;
+    margin-left: 10px;
+}

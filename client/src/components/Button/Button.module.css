@@ -1,0 +1,27 @@
+.btn-bg > button{
+    height: 40px !important;
+    color: #fff;
+    background: #29B171;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    /* margin-right: 10px; */
+
+    position: absolute;
+    bottom: 20px;
+    right: 60px;
+}
+
+.btn-bg > button:hover{
+    color: #fff !important;
+    background: #29B171 !important;
+}
+.btn-bg > button:focus{
+    color: #fff !important;
+    background: #29B171 !important;
+}
+.btn-bg > button:active{
+    color: #fff !important;
+    background: #29B171 !important;
+}

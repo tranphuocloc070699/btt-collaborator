@@ -1,0 +1,21 @@
+.box_title{
+    padding: 25px 32px;
+    background: #FFF;
+}
+
+.box_title-h3{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.box-box{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.box-box button{
+    background: #35794A;
+    height: 40px;
+    color: #FFF;
+}

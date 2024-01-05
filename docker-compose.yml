@@ -1,0 +1,16 @@
+version: "3"
+services:
+  party_app: 
+    container_name: party_app
+    build: .
+    ports:
+      - "3000:3000"
+  party_nginx: 
+    container_name: party_nginx
+    build: ./nginx/
+    ports:
+      - "80:80"
+    volumes:
+      - ".:/var/www/html/party_service"
+      - "./nginx/conf.d:/etc/nginx/conf.d/"
+      

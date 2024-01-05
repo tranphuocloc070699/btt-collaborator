@@ -1,0 +1,141 @@
+.party_Sentiment{
+
+    width: 100%;
+ 
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+ 
+ }
+ 
+ .party_Sentiment-table{
+     padding: 25px 32px;
+     box-sizing: border-box;
+     background: #FFF;
+     margin-top: 5px;
+ }
+ 
+
+ /* Table party member css */
+.colunm_action{
+    display: flex;
+    justify-content: right;
+}
+
+.table_header{
+    color: #A1A5B7;
+}
+
+.colunm_action-edit{
+    width: 40px;
+    height: 40px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 5px;
+    color: #29B171;
+    background: #E2FFF1;
+    cursor: pointer;
+}
+
+.colunm_name{
+    font-size: 16px;
+}
+
+.status_file{
+    font-size: 16px;
+    color: #8950FC;
+}
+
+.full_name{
+    color: #434349;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: capitalize;
+}
+
+.member_help{
+    color: #A1A5B7;
+    font-weight: bold;
+}
+
+.colunm_flex{
+    display: flex;
+    align-items: center;
+}
+
+.colunm_flex p{
+    margin-left: 10px;
+    font-size: 14px;
+    text-transform: capitalize;
+    font-weight: bold;
+    color: #434349;
+}
+
+.parent_tolip{
+    list-style-type: disc;
+}
+.tolip{
+    display: block;
+  	display: -webkit-box;
+  	height: 16px*1.3*3;
+  	font-size: 16px;
+  	line-height: 1.3;
+  	-webkit-line-clamp: 1;  /* số dòng hiển thị */
+  	-webkit-box-orient: vertical;
+  	overflow: hidden;
+  	text-overflow: ellipsis;
+  	margin-top:10px;
+}
+
+.party_Sentiment-table   {
+
+}
+
+.party_Sentiment-table  ul.ant-pagination{
+    /* background-color: #fff; */
+   background-color: red !important;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    overflow: hidden;
+}
+:where(.css-dev-only-do-not-override-2q8sxy).ant-pagination .ant-pagination-total-text{
+    position: absolute !important;
+    right: 30px !important;
+    margin-right: 0 !important;
+    background-color: red !important;
+}
+.ant-pagination-options{
+    position: absolute;
+    right: 190px;
+    padding: 0 30px;
+}
+
+.party-sentiment-manager__table__status{
+    color: #8950FC;
+    display: flex;
+    align-items: center;
+    
+}
+.party-sentiment-manager__table__status__icon{
+    color: #8950FC;
+    width: 10px;
+    height: 10px;
+    max-height: 10px;
+    max-width: 10px;
+    border-radius: 999px;
+    background-color: #8950FC;
+    flex-grow: 1;
+
+}
+.party-sentiment-manager__table__status__value{
+    color: #8950FC;
+    margin-left: 12px;
+    width: 100%;
+    display: -webkit-box;
+-webkit-line-clamp: 1;
+-webkit-box-orient: vertical;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
