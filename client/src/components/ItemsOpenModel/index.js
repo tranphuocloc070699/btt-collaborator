@@ -8,8 +8,7 @@ function ItemOpenModel(setOpenModel) {
                 onClick={()=>{setOpenModel(true)}}
                 className={Styles["title-add"]}
             >
-                <FaPlusCircle />
-                <div>Thêm</div>
+                <div>Đề xuất</div>
             </div>
           ),
         },

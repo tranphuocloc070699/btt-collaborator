@@ -6,7 +6,8 @@ import Title from "../../components/Title";
 
 import { buildData } from "../../utils/TableConfig";
 import { columns } from "./tableConfig"
-import { Table } from "antd";
+import { Table,Dropdown,theme } from "antd";
+import {CheckCircleOutlined,EditOutlined,CloseCircleOutlined} from "@ant-design/icons"
 
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
@@ -21,11 +22,35 @@ import {
     listCollaboratorSelector
 } from "../../store/redux/selecters";
 // import PartySentimentPopup from "../../components/Modal/PartySemtiment";
+import CreateCollaboratorModal from "../../components/Modal/CreateCollaborator"
+import CollaboratorInfoModal from "../../components/Modal/CollaboratorInfo"
 import Loadding from "../../components/Loading/LoadingComponient";
 import { CheckMicroFrontEnd } from "../../utils/Token";
 import SearchCollaborator from "../../components/SearchCollaborator";
+
+const items = [
+    {
+      label: 'Duyệt đề xuất',
+      key: '1',
+      icon: <CheckCircleOutlined />,
+    },
+    {
+      label: 'Chỉnh sửa bổ sung',
+      key: '2',
+      icon:<EditOutlined />
+    },
+    {
+      label: 'Vô hiệu hóa',
+      key: '3',
+      danger:true,
+      icon:<CloseCircleOutlined />
+    },
+  ];
+
 function Collaborator() {
     const [open,setOpen] = useState(false)
+    const [infoModalOpen,setInfoModalOpen] = useState(false)
+    const [collaboratorSelected,setCollaboratorSelected] = useState({})
     const [page,setPage] = useState({
         page: 1,
         page_size: 10,
@@ -36,6 +61,12 @@ function Collaborator() {
     const [search,setSearch] = useState({
         full_name: ""
     })
+
+    const [upsaveCollaborator,setUpsaveCollaborator] = useState({})
+   
+
+ 
+    
 
     const listCollaborator = useSelector(listCollaboratorSelector);
     
@@ -63,6 +94,10 @@ function Collaborator() {
         history.push(`${pathMicro}/collaborator/manager`,  { id: record.awareness_id, name: record.full_name})
     }
 
+    const onUpsaveSubmit = (type) =>{
+      console.log({type})
+    }
+
     // // List cảm tình đảnh và phân trang theo page
     // useEffect(()=>{
     //     GetListSentiment()
@@ -71,7 +106,8 @@ function Collaborator() {
     return ( 
         <div className={Styles["party_Sentiment"]}>
             <Title title={"Quản lý cộng tác viên chuyên gia - chuyên viên"} setOpen={setOpen} addButton={true} />
-            {/* <PartySentimentPopup setOpen={setOpen} open={open} /> */}
+            <CreateCollaboratorModal setOpenModal={setOpen} open={open} title={'ĐỀ XUẤT'} collaborator={upsaveCollaborator} setCollaborator={setUpsaveCollaborator}  onSubmit={onUpsaveSubmit}/>
+            <CollaboratorInfoModal setOpenModal={setInfoModalOpen} open={infoModalOpen} collaborator={collaboratorSelected} setCollaborator={setCollaboratorSelected} />
             <SearchCollaborator 
                 callApiFollowOnPage={"party-awareness"}
                 setSearch={setSearch} 
@@ -79,7 +115,27 @@ function Collaborator() {
                 UserSearchParams={{}}
             />
             <div className={Styles["party_Sentiment-table"]}>
-                {!loading ? <Loadding/> :  <Table 
+                {!loading ? <Loadding/> :  
+                   <Dropdown
+                   menu={{
+                     items,
+                   }}
+                   trigger={['contextMenu']}
+                 >
+                <div>
+                <Table
+                 onRow={(record, rowIndex) => {
+                    return {
+                      onClick: (event) => {
+                        setInfoModalOpen(true)
+                        setCollaboratorSelected(record)
+                      }, // click row
+                      onDoubleClick: (event) => {}, // double click row
+                      onContextMenu: (event) => {console.log({event:record})}, // right button click row
+                      onMouseEnter: (event) => {}, // mouse enter row
+                      onMouseLeave: (event) => {}, // mouse leave row
+                    };
+                  }}
                     columns={columns(OnChangeDetailsPage,)}
                     dataSource={buildData(listCollaborator)}  
                     pagination={{
@@ -105,7 +161,11 @@ function Collaborator() {
                         setPage({...page, page_size: pageOption.pageSize, page: pageOption.current })
                     }}
                     
-                />}
+                /> 
+                </div>
+                 
+                 </Dropdown>
+                }
                
             </div>
         </div>

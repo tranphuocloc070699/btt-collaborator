@@ -17,7 +17,7 @@ export const columns = (OnChangeDetailsPage) => {
       width: "2%",
       title: <span className={Styles["table_header"]}>STT</span>,
       render: (_, record) => {
-        return <div className={Styles["colunm_stt"]}>0</div>;
+        return <div className={Styles["colunm_stt"]}>{record.id}</div>;
       },
     },
     {
@@ -42,7 +42,7 @@ export const columns = (OnChangeDetailsPage) => {
       render: (_, record) => {
         // const ListData = ListDep(record?.dep_pos);
         // return renderListItems(ListData);
-        return (<div>RenderListItems</div>)
+        return (<div>{record?.gender}</div>)
       },
     },
     {
@@ -59,6 +59,7 @@ export const columns = (OnChangeDetailsPage) => {
       title: <span className={Styles["table_header"]}>Nơi công tác</span>,
       render: (_, record) => {
         return <div>record?.party_awareness_cell</div>;
+        
       },
     },
     {

@@ -33,7 +33,29 @@ let endpoints = {
    "updateCareMode": (id)=> `/care-mode/${id}`,
    "deleteCareMode": (id)=> `/care-mode/${id}`,
 
-    
+    // Chuyên gia - chuyên viên
+    // filter: full_name,dep_names,pos_names,workplace
+   "fetchListCollaborator": (page,page_size,sort_by,order,filter)=> `/collaborator/?page_size=${page_size}&page=${page}&sort_by=${sort_by}&order=${order}${filter}`,
+   "fetchCollaboratorByID": (id) => `/collaborator/${id}`,
+   "createCollaborator": (id) => `/collaborator/${id}`,
+   "updateCollaborator": (id)=> `/collaborator/${id}`,
+   "deleteCollaborator": (id)=> `/collaborator/${id}`,
+
+   // List department/positions
+   // filter: dep_name   
+   "fetchDepartmentList": (filter)=> `/collaborator/departments/list/${filter}`,
+   // filter: pos_name  
+   "fetchPositionlist": (filter)=> `/collaborator/positions/list/${filter}`,
+
+   "pushToCollaborativeField":(id)=> `/collaborator/${id}/fields`,
+   "removeFromCollaborativeField":(id)=> `/collaborator/${id}/fields`,
+
+   "pushToCollaborativeContent":(id)=> `/collaborator/${id}/contents`,
+   "removeFromCollaborativeContent":(id)=> `/collaborator/${id}/contents`,
+
+   "pushToCareMode":(id)=> `/collaborator/${id}/care-mode`,
+   "removeFromCareMode":(id)=> `/collaborator/${id}/care-mode`,
+
 }
 
 module.exports = {

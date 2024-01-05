@@ -40,6 +40,30 @@ export let endpoints = {
   "updateCollaboratorContent": (id)=> `/api/collaborator-content/update/${id}`,
   "deleteCollaboratorContent": (id)=> `/api/collaborator-content/delete/${id}`,
 
+//   Collaborator
+   // Chuyên gia - chuyên viên
+    // filter: full_name,dep_names,pos_names,workplace
+    "fetchListCollaborator": (page,page_size,sort_by,order,filter)=> `/api/collaborator/?page_size=${page_size}&page=${page}&sort_by=${sort_by}&order=${order}${filter}`,
+    "fetchCollaboratorByID": (id) => `/api/collaborator/${id}`,
+    "createCollaborator": (id) => `/api/collaborator/create/${id}`,
+    "updateCollaborator": (id)=> `/api/collaborator/update/${id}`,
+    "deleteCollaborator": (id)=> `/api/collaborator/delete/${id}`,
+ 
+    // List department/positions
+    // filter: dep_name   
+    "fetchDepartmentList": (filter)=> `/api/collaborator/department-list/${filter}`,
+    // filter: pos_name  
+    "fetchPositionlist": (filter)=> `/api/collaborator/position-list/${filter}`,
+ 
+    "pushToCollaborativeField":(id)=> `/api/collaborator/create/field/${id}`,
+    "removeFromCollaborativeField":(id)=> `/api/collaborator/delete/field/${id}`,
+ 
+    "pushToCollaborativeContent":(id)=> `/api/collaborator/create/content/${id}`,
+    "removeFromCollaborativeContent":(id)=> `/api/collaborator/delete/content/${id}`,
+ 
+    "pushToCareMode":(id)=> `/api/collaborator/create/care-mode/${id}`,
+    "removeFromCareMode":(id)=> `/api/collaborator/delete/care-mode/${id}`, 
+
 
   // Upload
   "uploadFileChangeParty" : `/api/upload`

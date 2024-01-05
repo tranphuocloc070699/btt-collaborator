@@ -19,8 +19,8 @@ function getItem(label, key, icon, children) {
 
 export function ItemMenu(){
         return [
-            getItem(<Link to={`${pathMicro}/collaborator`}>Chuyên gia - chuyên viên</Link>,"collaborator", <UsergroupAddOutlined /> ,[
-                getItem(<Link to={`${pathMicro}/collaborator/manager`}>Quản lý</Link>,"manager",),
+            getItem(<Link to={`${pathMicro}`}>Chuyên gia - chuyên viên</Link>,"collaborator", <UsergroupAddOutlined /> ,[
+                getItem(<Link to={`${pathMicro}/manager`}>Quản lý</Link>,"manager",),
             ]),      
            
             

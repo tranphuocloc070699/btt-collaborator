@@ -14,9 +14,8 @@ function Title({title, addButton=false, setOpen={setOpen}}) {
                 <Button 
                     onClick={()=>setOpen(true)}
                     type="ghost"
-                    icon={<PlusOutlined />}
                 >
-                    Thêm
+                    Đề xuất
                 </Button>
                 }
 

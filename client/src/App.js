@@ -27,7 +27,7 @@ function App() {
 
   const commonRoutes  = (
     <>
-        <Route path={`${pathMicro}/collaborator/manager`}  component={Collaborator} />
+        <Route path={`${pathMicro}/manager`}  component={Collaborator} />
    
     </>
   )
@@ -59,7 +59,15 @@ function App() {
     );
   } else {
     return (
-      <ConfigProvider locale={locale}>
+      <ConfigProvider locale={locale} theme={{
+        components: {
+          Tabs: {
+            itemSelectedColor:'#29B171',
+            itemHoverColor:'#29B171',
+            inkBarColor:'#29B171'
+          },
+        },
+      }}>
         <Provider store={store}>
             <ToastContainer />
             <BrowserRouter basename="/">

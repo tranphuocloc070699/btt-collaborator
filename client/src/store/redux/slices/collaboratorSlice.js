@@ -77,6 +77,8 @@ const collaboratorSlice = createSlice({
         updated_at:'2024-01-01',
         deleted_at:'2024-01-01',
     },
+    listDepartment:[],
+    listPosition:[]
   },
   reducers: {
     setListCollaborator: (state, action) => {
@@ -85,11 +87,27 @@ const collaboratorSlice = createSlice({
     setCollaborator: (state, action) => {
         state.collaborator = action.payload;
     },
+    setListDepartment: (state, action) => {
+        state.listDepartment = action.payload;
+    },
+    setListPosition: (state, action) => {
+        state.listPosition = action.payload;
+    },
     fetchCollaboratorTrigger: () => {},
     fetchListCollaboratorTrigger: () => {},
     createCollaboratorTrigger:() =>{},
     updateCollaboratorTrigger: () => {},
-    deleteCollaboratorTrigger:() =>{}
+    deleteCollaboratorTrigger:() =>{},
+
+    fetchDepartmentListTrigger: () => {},
+    fetchPositionListTrigger: () => {},
+
+    pushToCollaborativeFieldTrigger: () => {},
+    pushToCollaborativeContentTrigger: () => {},
+    pushToCareModeTrigger: () => {},
+    removeFromCollaborativeFieldTrigger: () => {},
+    removeFromCollaborativeContentTrigger: () => {},
+    removeFromCareModeTrigger: () => {},
   },
 });
 
@@ -100,6 +118,14 @@ export const {
     fetchCollaboratorTrigger,
     createCollaboratorTrigger,
     updateCollaboratorTrigger,
-    deleteCollaboratorTrigger
+    deleteCollaboratorTrigger,
+    fetchDepartmentListTrigger,
+    fetchPositionListTrigger,
+    pushToCollaborativeFieldTrigger,
+    pushToCollaborativeContentTrigger,
+    pushToCareModeTrigger,
+    removeFromCollaborativeFieldTrigger,
+    removeFromCollaborativeContentTrigger,
+    removeFromCareModeTrigger
 } = collaboratorSlice.actions;
 export default collaboratorSlice.reducer;

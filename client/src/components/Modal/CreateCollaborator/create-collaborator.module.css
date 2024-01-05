@@ -1,0 +1,28 @@
+.create-collaborator-modal__block{
+    display: flex;
+    align-items: center;
+    padding: 16px;
+
+}
+.profile-status-modal-body__block__input{
+    height:44px ;
+    width: 100%;
+    background: #F3F6F9;
+    border-radius: 0px;
+    border: none;
+    outline: none;
+}
+
+.create-collaborator-modal__footer{
+    text-align: center;
+    margin-top: 32px;
+}
+.create-collaborator-modal__footer__btn{
+    width: 151px;
+    height: 44px;
+    text-align: center;
+    outline: none;
+    border: none;
+    background-color: #29B171;
+    color: white;
+}
