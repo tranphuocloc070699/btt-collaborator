@@ -14,8 +14,6 @@ const fetchListCollaborator = (req, res) => {
             filter.concat(`&${key}=${item[key]}`)
         }
     })
-
-    console.log({filter})
   try {
     API.get(
         endpoints["fetchListCollaborator"](page,page_size,sort_by,order,filter),
@@ -114,22 +112,26 @@ const deleteCollaborator = (req, res) => {
 
 
   const fetchDepartmentList = (req, res) => {
+    console.log('fetchDepartmentList')
     const {dep_name} = req.query
       let filter = "";
       if(dep_name) filter.concat(`?dep_name=${dep_name}`)
       console.log({filter})
     try {
-      API.get(
-          endpoints["fetchDepartmentList"](filter),
-          getHeaderToken(req)
-        )
-          .then((response) => {
-            res.send(response.data);
-          })
-          .catch((error) => {
+      return {
+        success:true
+      }
+      // API.get(
+      //     endpoints["fetchDepartmentList"](filter),
+      //     getHeaderToken(req)
+      //   )
+      //     .then((response) => {
+      //       res.send(response.data);
+      //     })
+      //     .catch((error) => {
             
-            res.send(error);
-          });
+      //       res.send(error);
+      //     });
     } catch (error) {
       return res.send(error);
     }

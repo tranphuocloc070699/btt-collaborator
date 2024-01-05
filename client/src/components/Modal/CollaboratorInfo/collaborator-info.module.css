@@ -26,7 +26,7 @@
 .collaborator-info-modal__body__top__info__block {
     display: flex;
     align-items: center;
-    gap:16px
+    gap:32px
 }
 /* Body - Top - Username and phone */
 .collaborator-info-modal__body__top__info__block__username {
@@ -75,6 +75,7 @@ color: #A4A4B9;
 .collaborator-info-modal__body__bottom__block {
     display: flex;
     gap: 32px;
+    padding: 12px 0;
 
 }
 .collaborator-info-modal__body__bottom__block__title {
@@ -84,7 +85,7 @@ color: #A4A4B9;
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 16px;
     color: #A4A4B9;
 
 }
@@ -92,8 +93,9 @@ color: #A4A4B9;
 }
 .collaborator-info-modal__body__bottom__block__value__tag {
     display: flex;
-    gap:8px;
+    gap:16px;
     align-items: center;
+    
 }
 .collaborator-info-modal__body__bottom__block__value__tag__item {
     background-color: white;
@@ -112,6 +114,7 @@ color: #A4A4B9;
 /* Footer */
 .collaborator-info-modal__footer {
     text-align: center;
+    margin-top: 40px;
 }
 .collaborator-info-modal__footer__btn {
     width: 151px;

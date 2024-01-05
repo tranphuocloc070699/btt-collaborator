@@ -36,8 +36,8 @@ export const renderListItems = (List = [])=>{
     return (
         <div className={Styles["colunm_name"]}>
             <ul className={Styles["parent_tolip"]}>
-                {List.map((items)=>{
-                    return <li title={items} className={Styles["tolip"]}>{items}</li>
+                {List.map((items,index)=>{
+                    return <li title={items} key={index} className={Styles["tolip"]}>{items}</li>
                 })}
             </ul>
         </div>

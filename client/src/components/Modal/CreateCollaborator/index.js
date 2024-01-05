@@ -26,13 +26,34 @@ function CreateCollaboratorModal({ open, setOpenModal,title,collaborator,setColl
       label: 'Thông tin cá nhân',
       children: <div>
         <div className={Styles[`create-collaborator-modal__block`]}>
-            <p>Danh xưng, học hàm, học vị </p>
+            <p>Title</p>
         <Input
-              value={``}
+              value={collaborator.title}
               className={`${Styles["profile-status-modal-body__block__input"]}`}
-              onChange={(e) => handleContentChange('key',e.target.value)}
+              onChange={(e) => handleContentChange('title',e.target.value)}
               placeholder="Nhập vào đây..."
             />
+            
+        </div>
+        <div className={Styles[`create-collaborator-modal__block`]}>
+            <p>Nơi làm việc</p>
+        <Input
+              value={collaborator.workplace}
+              className={`${Styles["profile-status-modal-body__block__input"]}`}
+              onChange={(e) => handleContentChange('workplace',e.target.value)}
+              placeholder="Nhập vào đây..."
+            />
+            
+        </div>
+        <div className={Styles[`create-collaborator-modal__block`]}>
+            <p>Link Mạng xã hội</p>
+        <Input
+              value={collaborator.other_social}
+              className={`${Styles["profile-status-modal-body__block__input"]}`}
+              onChange={(e) => handleContentChange('other_social',e.target.value)}
+              placeholder="Nhập vào đây..."
+            />
+            
         </div>
         <div className={Styles[`create-collaborator-modal__footer`]}>
           <button className={Styles[`create-collaborator-modal__footer__btn`]} onClick={() =>{
@@ -43,21 +64,21 @@ function CreateCollaboratorModal({ open, setOpenModal,title,collaborator,setColl
         </div>
       </div>,
     },
-    {
-      key: '2',
-      label: 'Liên hệ',
-      children: 'Content of Tab Pane 2',
-    },
-    {
-      key: '3',
-      label: 'Công tác',
-      children: 'Content of Tab Pane 3',
-    },
+    // {
+    //   key: '2',
+    //   label: 'Liên hệ',
+    //   children: 'Content of Tab Pane 2',
+    // },
+    // {
+    //   key: '3',
+    //   label: 'Công tác',
+    //   children: 'Content of Tab Pane 3',
+    // },
   ];
   return (
     <Modal
       open={open}
-      width={500}
+      width={600}
       title={''}
       footer={false}
       onCancel={() => setOpenModal(false)}

@@ -5,7 +5,6 @@ import { Avatar,Image, Badge } from "antd"
 function AvatarContainer({linkUrl, status}) {
     const [showImage,setShowImage] = useState(false);
     if(linkUrl && linkUrl.length>0){
-        console.log(`${process.env.BASE_URL_RESOURCE}${linkUrl}`)
     }
     return ( 
         <div>

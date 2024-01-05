@@ -43,9 +43,9 @@ let endpoints = {
 
    // List department/positions
    // filter: dep_name   
-   "fetchDepartmentList": (filter)=> `/collaborator/departments/list/${filter}`,
+   "fetchDepartmentList": (filter)=> `/collaborator/departments/list${filter}`,
    // filter: pos_name  
-   "fetchPositionlist": (filter)=> `/collaborator/positions/list/${filter}`,
+   "fetchPositionlist": (filter)=> `/collaborator/positions/list${filter}`,
 
    "pushToCollaborativeField":(id)=> `/collaborator/${id}/fields`,
    "removeFromCollaborativeField":(id)=> `/collaborator/${id}/fields`,

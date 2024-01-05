@@ -2,7 +2,7 @@ import React from "react";
 import Styles from "./collaborator.module.css";
 
 import { EditOutlined } from "@ant-design/icons";
-// import { ListDep, ListPos, renderListItems } from "../../utils/TableConfig";
+import { ListDep, ListPos, renderListItems } from "../../utils/TableConfig";
 import AvatarContainer from "../../components/Avatar";
 
 export const columns = (OnChangeDetailsPage) => {
@@ -31,7 +31,7 @@ export const columns = (OnChangeDetailsPage) => {
                 record?.avatar ? extractAvatarFromArray(record?.avatar) : ""
               }
             />
-            <p>record.full_name</p>
+            <p>{record.full_name}</p>
           </div>
         );
       },
@@ -40,33 +40,42 @@ export const columns = (OnChangeDetailsPage) => {
       width: "5%",
       title: <span className={Styles["table_header"]}>Giới tính</span>,
       render: (_, record) => {
-        // const ListData = ListDep(record?.dep_pos);
-        // return renderListItems(ListData);
+     
         return (<div>{record?.gender}</div>)
       },
     },
     {
       width: "24%",
-      title: <span className={Styles["table_header"]}>Danh xưng, học hàm, học vị 
+      title: <span className={Styles["table_header"]}>Danh xưng, học hàm, học vị,
       Chức vụ/Chức danh</span>,
       render: (_, record) => {
-        // const ListData = ListPos(record?.dep_pos);
-        return (<div>RenderListItems</div>)
+        // console.log(record.dep_pos);
+        const data = []
+        if(record?.dep_pos){
+          
+        data.push(record?.dep_pos[0]?.position?.pos_name)
+        data.push(record?.dep_pos[0]?.department_name)
+        }
+ 
+
+        // const ListData = ListDep(record?.dep_pos);
+
+        return renderListItems(data);
       },
     },
     {
       width: "12%",
       title: <span className={Styles["table_header"]}>Nơi công tác</span>,
       render: (_, record) => {
-        return <div>record?.party_awareness_cell</div>;
+        return <div>{record?.workplace}</div>;
         
       },
     },
     {
       width: "10%",
-      title: <span className={Styles["table_header"]}>Nơi công tác</span>,
+      title: <span className={Styles["table_header"]}>Đề xuất</span>,
       render: (_, record) => {
-        return <div>record?.member_help</div>;
+        return <div>{record?.proposer_full_name}</div>;
       },
     },
   ];

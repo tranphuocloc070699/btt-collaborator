@@ -3,6 +3,7 @@ import { setLoading } from "../../slices/loadingSlice"
 import {
     setListCollaborator,
     setCollaborator,
+    setTotalItemsOfListCollaborator,
     fetchListCollaboratorTrigger,
     fetchCollaboratorTrigger,
     createCollaboratorTrigger,
@@ -39,9 +40,13 @@ import { ErrorNotification, SuccessNotification } from "../../../../utils/Notifi
 
 function* handleFetchListCollaborator(payload) {
     const result = yield call(fetchListCollaborator_API,payload?.data)
-    if(result?.code === "200"){
-        // yield put(setAssetDeclarationList(result?.data))
-        // yield put(setLoading(true))
+    if(result?.code === "200" && result?.data){
+        yield put(setListCollaborator(result?.data))
+        
+        yield put(setTotalItemsOfListCollaborator(result?.metadata?.total_items))
+        // if(payload.setLoading){
+        //     payload.setLoading()
+        // }
     }else{
         ErrorNotification("Không lấy được dữ liệu")
     }
@@ -95,6 +100,7 @@ function* handleDeleteCollaborator(payload){
 }
 
 function* handleFetchListDepartment(payload) {
+
     const result = yield call(fetchDepartmentList_API,payload?.data)
     if(result?.code === "200"){
         // yield put(setAssetDeclarationList(result?.data))

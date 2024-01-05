@@ -13,13 +13,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom"
 
-// import { 
-//     getListPartySentiment,
-// } from "../../store/redux/slices/partySentimentSlice";
+import { 
+  fetchListCollaboratorTrigger,
+} from "../../store/redux/slices/collaboratorSlice";
 
 import {
     LoadingSelector,
-    listCollaboratorSelector
+    listCollaboratorSelector,
+    totalItemsOfListCollaboratorSelector
 } from "../../store/redux/selecters";
 // import PartySentimentPopup from "../../components/Modal/PartySemtiment";
 import CreateCollaboratorModal from "../../components/Modal/CreateCollaborator"
@@ -48,9 +49,10 @@ const items = [
   ];
 
 function Collaborator() {
+  const dispatch = useDispatch();
     const [open,setOpen] = useState(false)
     const [infoModalOpen,setInfoModalOpen] = useState(false)
-    const [collaboratorSelected,setCollaboratorSelected] = useState({})
+    const [collaboratorSelected,setCollaboratorSelected] = useState(null)
     const [page,setPage] = useState({
         page: 1,
         page_size: 10,
@@ -59,21 +61,26 @@ function Collaborator() {
     })
     const [pageNumber,setPageNumber] = useState(10)
     const [search,setSearch] = useState({
-        full_name: ""
+        full_name: "",
+        dep_names:"",
+        pos_names:"",
+        workplace:"",
+        is_collaborator:true
     })
 
-    const [upsaveCollaborator,setUpsaveCollaborator] = useState({})
-   
+    const [upsaveCollaborator,setUpsaveCollaborator] = useState({
+      title:'',
+      workplace:'',
+      other_social:''
+    })
+    
 
  
     
 
     const listCollaborator = useSelector(listCollaboratorSelector);
+    const totalItems = useSelector(totalItemsOfListCollaboratorSelector);
     
-    useEffect(() =>{
-        console.log({listCollaborator})
-    },[listCollaborator])
-
     const pathMicro = CheckMicroFrontEnd()
     // const history = useHistory()
     // const dispatch = useDispatch()
@@ -96,12 +103,20 @@ function Collaborator() {
 
     const onUpsaveSubmit = (type) =>{
       console.log({type})
+      console.log({upsaveCollaborator})
     }
 
-    // // List cảm tình đảnh và phân trang theo page
-    // useEffect(()=>{
-    //     GetListSentiment()
-    // },[page])
+    // List cảm tình đảnh và phân trang theo page
+    useEffect(()=>{
+      const query = {
+        ...page,
+        ...search
+      }
+        dispatch({
+          type:fetchListCollaboratorTrigger.type,
+          data:query
+        })
+    },[page])
     
     return ( 
         <div className={Styles["party_Sentiment"]}>
@@ -109,10 +124,8 @@ function Collaborator() {
             <CreateCollaboratorModal setOpenModal={setOpen} open={open} title={'ĐỀ XUẤT'} collaborator={upsaveCollaborator} setCollaborator={setUpsaveCollaborator}  onSubmit={onUpsaveSubmit}/>
             <CollaboratorInfoModal setOpenModal={setInfoModalOpen} open={infoModalOpen} collaborator={collaboratorSelected} setCollaborator={setCollaboratorSelected} />
             <SearchCollaborator 
-                callApiFollowOnPage={"party-awareness"}
                 setSearch={setSearch} 
                 search={search}  
-                UserSearchParams={{}}
             />
             <div className={Styles["party_Sentiment-table"]}>
                 {!loading ? <Loadding/> :  
@@ -123,12 +136,14 @@ function Collaborator() {
                    trigger={['contextMenu']}
                  >
                 <div>
+                  {JSON.stringify(totalItems)}
                 <Table
                  onRow={(record, rowIndex) => {
                     return {
                       onClick: (event) => {
-                        setInfoModalOpen(true)
                         setCollaboratorSelected(record)
+                        setInfoModalOpen(true)
+                      
                       }, // click row
                       onDoubleClick: (event) => {}, // double click row
                       onContextMenu: (event) => {console.log({event:record})}, // right button click row
@@ -140,7 +155,7 @@ function Collaborator() {
                     dataSource={buildData(listCollaborator)}  
                     pagination={{
                         position: ["bottomLeft"],
-                        total: 10,
+                        total: totalItems,
                         locale:{items_per_page:""},
                         defaultPageSize: 10,
                         showSizeChanger: true,
@@ -152,12 +167,12 @@ function Collaborator() {
                             return `Hiển thị ${total} trong ${total}`;
                           },
                           onChange: (page, pageNumber) => {
-                            
+                            console.log({pageNumber})
                             setPageNumber(pageNumber)
                           },
                     }}
                     onChange={(pageOption)=>{
-                    
+                      console.log({pageOption})
                         setPage({...page, page_size: pageOption.pageSize, page: pageOption.current })
                     }}
                     

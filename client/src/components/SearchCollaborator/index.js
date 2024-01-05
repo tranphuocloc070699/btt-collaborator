@@ -1,21 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Styles from "./searchCollaborator.module.css";
 
 import { Button, Input, Select } from "antd";
 import { useDispatch,useSelector } from "react-redux";
 
-// import { getDepartments, getPartyMemberCell } from "../../store/redux/slices/profileSlice";
-// import { depListSelecter, PartyMemberCellSelecter } from "../../store/redux/selecters"
+import { fetchDepartmentListTrigger, fetchPositionListTrigger } from "../../store/redux/slices/collaboratorSlice";
 
-function SearchCollaborator({setSearch, search, UserSearchParams, callApiFollowOnPage}) {
+function SearchCollaborator({setSearch, search}) {
 
     const dispatch = useDispatch();
-    // const dep = useSelector(depListSelecter)
-    // const PartyMemberCell = useSelector(PartyMemberCellSelecter)
+
     
     const onSearch = ()=>{
         UserSearchParams()
     }
+
+    useEffect(() =>{
+        dispatch({
+            type:fetchDepartmentListTrigger.type,
+            data:{
+                dep_names:''
+            }
+        })
+        dispatch({
+            type:fetchPositionListTrigger.type,
+            data:{
+                pos_names:''
+            }
+        })
+    },[])
 
 
     const filterOption = (input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
@@ -35,7 +48,7 @@ function SearchCollaborator({setSearch, search, UserSearchParams, callApiFollowO
                         allowClear
                         showSearch
                         filterOption={filterOption}
-                        placeholder="Chức danh/Chức vụ"
+                        placeholder="Chức danh"
                         onFocus={()=>{
                             // dispatch({
                             //     type: getDepartments.type,
@@ -65,6 +78,39 @@ function SearchCollaborator({setSearch, search, UserSearchParams, callApiFollowO
                 </div>
                 <div className={Styles["search_pb"]}>
                     <Select
+                        allowClear
+                        showSearch
+                        filterOption={filterOption}
+                        placeholder="Chức vụ"
+                        onFocus={()=>{
+                            // dispatch({
+                            //     type: getDepartments.type,
+                            //     data: {
+                            //         page: 1,
+                            //         page_size: 9999,
+                            //         sort_by: "id",
+                            //         order: "desc",
+                            //         party: callApiFollowOnPage
+                            //     }
+                            // })
+                        }}
+                        // options={dep.length && dep.map((item)=>{
+                        //     return {
+                        //         label: item,
+                        //         value: item
+                        //     }
+                        // })}
+                        options={[
+                            {
+                                value:0,
+                                label:"BTT"
+                            }
+                        ]}
+                        onChange={(value)=>{setSearch({...search, pos_names: value || "" })}}
+                    />
+                </div>
+                <div className={Styles["search_pb"]}>
+                    <Select
                         showSearch
                         filterOption={filterOption}
                         placeholder="Nơi công tác"
@@ -89,7 +135,7 @@ function SearchCollaborator({setSearch, search, UserSearchParams, callApiFollowO
                         //         data: callApiFollowOnPage
                         //     })
                         // }}
-                        onChange={(value)=>{setSearch({...search, [`${callApiFollowOnPage}_cell`.replace("-","_")]: value || "" })}}
+                        onChange={(value)=>{setSearch({...search, workplace: value || "" })}}
                     />
                 </div>
            </div>
