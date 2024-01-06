@@ -44,16 +44,17 @@ export let endpoints = {
    // Chuyên gia - chuyên viên
     // filter: full_name,dep_names,pos_names,workplace
     "fetchListCollaborator": (page,page_size,sort_by,order,filter)=> `/api/collaborator/?page_size=${page_size}&page=${page}&sort_by=${sort_by}&order=${order}${filter}`,
-    "fetchCollaboratorByID": (id) => `/api/collaborator/${id}`,
+    "fetchCollaboratorByID": (id) => `/api/collaborator/single/${id}`,
     "createCollaborator": (id) => `/api/collaborator/create/${id}`,
+    "approveCollaborator": (id) => `/api/collaborator/patch/${id}`,
     "updateCollaborator": (id)=> `/api/collaborator/update/${id}`,
     "deleteCollaborator": (id)=> `/api/collaborator/delete/${id}`,
  
     // List department/positions
     // filter: dep_name   
-    "fetchDepartmentList": (filter)=> `/api/collaborator/department-list${filter}`,
+    "fetchDepartmentList": (filter)=> `/api/collaborator/department-list/${filter}`,
     // filter: pos_name  
-    "fetchPositionlist": (filter)=> `/api/collaborator/position-list${filter}`,
+    "fetchPositionlist": (filter)=> `/api/collaborator/position-list/${filter}`,
  
     "pushToCollaborativeField":(id)=> `/api/collaborator/create/field/${id}`,
     "removeFromCollaborativeField":(id)=> `/api/collaborator/delete/field/${id}`,

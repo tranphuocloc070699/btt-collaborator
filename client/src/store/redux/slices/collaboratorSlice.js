@@ -13,6 +13,23 @@ const collaboratorSlice = createSlice({
     setListCollaborator: (state, action) => {
         state.listCollaborator = action.payload;
     },
+    changeItemPropertyListCollaborator: (state,action) =>{
+      /* 
+      input: {
+        id:
+        data:{}
+      }
+      */
+      let array = state.listCollaborator.map(item => item);
+      let itemIndex = state.listCollaborator.findIndex(item => item.id == action.payload.id);
+      if(itemIndex!=-1){
+        Object.keys(action.payload.data).forEach((key) =>{
+          array[itemIndex][key] = action.payload.data[key];
+        })
+        
+        state.listCollaborator = array
+      }
+    },
     setTotalItemsOfListCollaborator: (state, action) => {
         state.totalItemsOfListCollaborator = action.payload;
     },
@@ -28,6 +45,7 @@ const collaboratorSlice = createSlice({
     fetchCollaboratorTrigger: () => {},
     fetchListCollaboratorTrigger: () => {},
     createCollaboratorTrigger:() =>{},
+    approveCollaboratorTrigger:() =>{},
     updateCollaboratorTrigger: () => {},
     deleteCollaboratorTrigger:() =>{},
 
@@ -46,10 +64,14 @@ const collaboratorSlice = createSlice({
 export const {
     setListCollaborator,
     setCollaborator,
+    setListDepartment,
+    setListPosition,
+    changeItemPropertyListCollaborator,
     setTotalItemsOfListCollaborator,
     fetchListCollaboratorTrigger,
     fetchCollaboratorTrigger,
     createCollaboratorTrigger,
+    approveCollaboratorTrigger,
     updateCollaboratorTrigger,
     deleteCollaboratorTrigger,
     fetchDepartmentListTrigger,

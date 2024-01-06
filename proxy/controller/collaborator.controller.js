@@ -11,7 +11,7 @@ const fetchListCollaborator = (req, res) => {
     array.forEach((item,index) =>{
         const key = Object.keys(item)[0];
         if(item[key]){
-            filter.concat(`&${key}=${item[key]}`)
+            filter+=`&${key}=${item[key]}`;
         }
     })
   try {
@@ -69,6 +69,25 @@ const createCollaborator = (req, res) => {
   }
 };
 
+const approveCollaborator = (req, res) => {
+  try {
+    const {id} = req.params;
+    API.patch(
+        endpoints["approveCollaborator"](id),
+        getHeaderToken(req)
+      )
+        .then((response) => {
+          res.send(response.data);
+        })
+        .catch((error) => {
+          res.send(error);
+        });
+  } catch (error) {
+    return res.send(error);
+  }
+};
+
+
 
 const updateCollaborator = (req, res) => {
   try {
@@ -112,27 +131,22 @@ const deleteCollaborator = (req, res) => {
 
 
   const fetchDepartmentList = (req, res) => {
-    console.log('fetchDepartmentList')
     const {dep_name} = req.query
       let filter = "";
       if(dep_name) filter.concat(`?dep_name=${dep_name}`)
-      console.log({filter})
     try {
-      return {
-        success:true
-      }
-      // API.get(
-      //     endpoints["fetchDepartmentList"](filter),
-      //     getHeaderToken(req)
-      //   )
-      //     .then((response) => {
-      //       res.send(response.data);
-      //     })
-      //     .catch((error) => {
-            
-      //       res.send(error);
-      //     });
+      API.get(
+          endpoints["fetchDepartmentList"](filter),
+          getHeaderToken(req)
+        )
+          .then((response) => {
+            res.send(response.data);
+          })
+          .catch((error) => {
+            res.send(error);
+          });
     } catch (error) {
+      console.log({error})
       return res.send(error);
     }
   };
@@ -142,7 +156,6 @@ const deleteCollaborator = (req, res) => {
       let filter = "";
       if(pos_name) filter.concat(`?pos_name=${pos_name}`)
   
-      console.log({filter})
     try {
       API.get(
           endpoints["fetchPositionlist"](filter),
@@ -286,6 +299,7 @@ module.exports = {
     fetchListCollaborator,
     fetchCollaboratorByID,
     createCollaborator,
+    approveCollaborator,
     updateCollaborator,
     deleteCollaborator,
     fetchDepartmentList,

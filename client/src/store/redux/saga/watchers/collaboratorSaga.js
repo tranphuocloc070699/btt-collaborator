@@ -3,10 +3,14 @@ import { setLoading } from "../../slices/loadingSlice"
 import {
     setListCollaborator,
     setCollaborator,
+    setListDepartment,
+    setListPosition,
+    changeItemPropertyListCollaborator,
     setTotalItemsOfListCollaborator,
     fetchListCollaboratorTrigger,
     fetchCollaboratorTrigger,
     createCollaboratorTrigger,
+    approveCollaboratorTrigger,
     updateCollaboratorTrigger,
     deleteCollaboratorTrigger,
     fetchDepartmentListTrigger,
@@ -23,6 +27,7 @@ import {
     fetchListCollaborator_API,
     fetchCollaboratorByID_API,
     createCollaborator_API,
+    approveCollaborator_API,
     updateCollaborator_API,
     deleteCollaborator_API,
     fetchDepartmentList_API,
@@ -40,6 +45,7 @@ import { ErrorNotification, SuccessNotification } from "../../../../utils/Notifi
 
 function* handleFetchListCollaborator(payload) {
     const result = yield call(fetchListCollaborator_API,payload?.data)
+    
     if(result?.code === "200" && result?.data){
         yield put(setListCollaborator(result?.data))
         
@@ -56,32 +62,79 @@ function* handleFetchCollaborator(payload){
     const result = yield call(fetchCollaboratorByID_API,payload?.data)
     if(result.code === "200"){
         // yield put(setAssetDeclarationByID(result?.data))
+        yield put(setCollaborator(result?.data))
+        if(payload.setOpen){
+            payload.setOpen(true)
+        }
     }else{
         ErrorNotification("Không lấy được dữ liệu")
+        if(payload.setOpen){
+            payload.setOpen(false)
+        }
     }
 }
 
 
-// Thực hiện các tác nhân được chọ
+
 function* handleCreateCollaborator(payload) {
+    
     const result = yield call(createCollaborator_API,payload?.data)
-    if(result?.code === "200"){
+    console.log({result})
+    if(result?.code === "200" && result?.data){
         // yield put(setCreateAssetDeclaration(result?.data))
         // yield put(setLoading(true))
-        // SuccessNotification("Kê khai thành công")
+        yield put(changeItemPropertyListCollaborator({
+            id:result?.data?.id,
+            data:{
+                state:result?.data?.state
+            }
+        }))
+        if(payload.setOpen){
+            payload.setOpen(false);
+        }
+        SuccessNotification("Đề xuất thành công")
     }else{
-        ErrorNotification("Kê khai không thành công")
+        ErrorNotification("Đề xuất không thành công")
+    }
+}
+
+function* handleApproveCollaborator(payload) {
+    
+    const result = yield call(approveCollaborator_API,payload?.data)
+    console.log({result})
+    if(result?.code === "200" && result?.data){
+        yield put(changeItemPropertyListCollaborator({
+            id:result?.data?.id,
+            data:{
+                state:result?.data?.state,
+                workplace:result?.data?.workplace
+            }
+        }))
+        if(payload.setOpen){
+            payload.setOpen(false);
+        }
+        SuccessNotification("Duyệt Đề xuất thành công")
+    }else{
+        ErrorNotification("Duyệt Đề xuất không thành công")
     }
 }
 
 
 function* handleUpdateCollaborator(payload){
-    
     const result = yield call(updateCollaborator_API,payload?.data)
     if(result.code === "200"){
-        // yield put(setUpdateAssetDeclarationByID(result?.data))
-        // yield put(setLoading(true))
-        // SuccessNotification("Đã cập nhật kê khai")
+        yield put(changeItemPropertyListCollaborator({
+            id:payload?.data?.id,
+            data:{
+                workplace:payload?.data.workplace,
+                title:payload?.data.title,
+                other_social:payload?.data.other_social
+            }
+        }))
+        if(payload.setOpen){
+            payload.setOpen(false);
+        }
+        SuccessNotification("Chỉnh sửa thành công")
     }else{
         ErrorNotification("Không lấy được dữ liệu")
     }
@@ -91,20 +144,35 @@ function* handleDeleteCollaborator(payload){
     
     const result = yield call(deleteCollaborator_API,payload?.data)
     if(result.code === "200"){
-        // yield put(setUpdateAssetDeclarationByID(result?.data))
-        // yield put(setLoading(true))
-        // SuccessNotification("Đã cập nhật kê khai")
+        console.log({data:result?.data?.workplace})
+        yield put(changeItemPropertyListCollaborator({
+            id:payload?.data?.id,
+            data:{
+                workplace:'',
+                state:'NOT_PROPOSED'
+            }
+        }))
+        if(payload.setOpen){
+            payload.setOpen(false);
+        }
+        SuccessNotification("Hủy chuyên gia thành công")
     }else{
         ErrorNotification("Không lấy được dữ liệu")
     }
 }
 
 function* handleFetchListDepartment(payload) {
-
     const result = yield call(fetchDepartmentList_API,payload?.data)
-    if(result?.code === "200"){
+    if(result?.code === "200" && result?.data){
         // yield put(setAssetDeclarationList(result?.data))
         // yield put(setLoading(true))
+        const data = result?.data.map(item => {
+            return {
+                value:item,
+                label:item
+            }
+        }) 
+        yield put(setListDepartment(data))
     }else{
         ErrorNotification("Không lấy được dữ liệu")
     }
@@ -112,9 +180,16 @@ function* handleFetchListDepartment(payload) {
 
 function* handleFetchListPosition(payload) {
     const result = yield call(fetchPositionlist_API,payload?.data)
-    if(result?.code === "200"){
+    if(result?.code === "200" && result?.data){
         // yield put(setAssetDeclarationList(result?.data))
         // yield put(setLoading(true))
+        const data = result?.data.map(item => {
+            return {
+                value:item,
+                label:item
+            }
+        }) 
+        yield put(setListPosition(data))
     }else{
         ErrorNotification("Không lấy được dữ liệu")
     }
@@ -204,6 +279,7 @@ function* onHandleRootCollaborator() {
     yield takeLatest(fetchListCollaboratorTrigger.type, handleFetchListCollaborator)
     yield takeLatest(fetchCollaboratorTrigger.type, handleFetchCollaborator)
     yield takeLatest(createCollaboratorTrigger.type, handleCreateCollaborator)
+    yield takeLatest(approveCollaboratorTrigger.type, handleApproveCollaborator)
     yield takeLatest(updateCollaboratorTrigger.type, handleUpdateCollaborator)
     yield takeLatest(deleteCollaboratorTrigger.type, handleDeleteCollaborator)
     yield takeLatest(fetchDepartmentListTrigger.type, handleFetchListDepartment)

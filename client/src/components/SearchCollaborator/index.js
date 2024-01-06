@@ -5,15 +5,17 @@ import { Button, Input, Select } from "antd";
 import { useDispatch,useSelector } from "react-redux";
 
 import { fetchDepartmentListTrigger, fetchPositionListTrigger } from "../../store/redux/slices/collaboratorSlice";
-
-function SearchCollaborator({setSearch, search}) {
+import {
+    LoadingSelector,
+    listDepartmentSelector,
+    listPositionSelector
+  } from "../../store/redux/selecters";
+function SearchCollaborator({setSearch, search,onSearch}) {
 
     const dispatch = useDispatch();
-
+    const listDepartment = useSelector(listDepartmentSelector)
+    const listPosition = useSelector(listPositionSelector)
     
-    const onSearch = ()=>{
-        UserSearchParams()
-    }
 
     useEffect(() =>{
         dispatch({
@@ -49,31 +51,11 @@ function SearchCollaborator({setSearch, search}) {
                         showSearch
                         filterOption={filterOption}
                         placeholder="Chức danh"
-                        onFocus={()=>{
-                            // dispatch({
-                            //     type: getDepartments.type,
-                            //     data: {
-                            //         page: 1,
-                            //         page_size: 9999,
-                            //         sort_by: "id",
-                            //         order: "desc",
-                            //         party: callApiFollowOnPage
-                            //     }
-                            // })
+                        options={listDepartment}
+                        onChange={(value)=>{
+                            console.log({value})
+                            setSearch({...search, dep_names: value || "" })
                         }}
-                        // options={dep.length && dep.map((item)=>{
-                        //     return {
-                        //         label: item,
-                        //         value: item
-                        //     }
-                        // })}
-                        options={[
-                            {
-                                value:0,
-                                label:"BTT"
-                            }
-                        ]}
-                        onChange={(value)=>{setSearch({...search, dep_names: value || "" })}}
                     />
                 </div>
                 <div className={Styles["search_pb"]}>
@@ -82,30 +64,7 @@ function SearchCollaborator({setSearch, search}) {
                         showSearch
                         filterOption={filterOption}
                         placeholder="Chức vụ"
-                        onFocus={()=>{
-                            // dispatch({
-                            //     type: getDepartments.type,
-                            //     data: {
-                            //         page: 1,
-                            //         page_size: 9999,
-                            //         sort_by: "id",
-                            //         order: "desc",
-                            //         party: callApiFollowOnPage
-                            //     }
-                            // })
-                        }}
-                        // options={dep.length && dep.map((item)=>{
-                        //     return {
-                        //         label: item,
-                        //         value: item
-                        //     }
-                        // })}
-                        options={[
-                            {
-                                value:0,
-                                label:"BTT"
-                            }
-                        ]}
+                        options={listPosition}
                         onChange={(value)=>{setSearch({...search, pos_names: value || "" })}}
                     />
                 </div>
@@ -123,18 +82,6 @@ function SearchCollaborator({setSearch, search}) {
                                 }
                             ]
                         }
-                        // options={PartyMemberCell.length && PartyMemberCell.map((item)=>{
-                        //     return {
-                        //         label: item,
-                        //         value: item
-                        //     }
-                        // })}
-                        // onFocus={()=>{
-                        //     dispatch({
-                        //         type: getPartyMemberCell.type,
-                        //         data: callApiFollowOnPage
-                        //     })
-                        // }}
                         onChange={(value)=>{setSearch({...search, workplace: value || "" })}}
                     />
                 </div>

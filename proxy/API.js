@@ -38,6 +38,7 @@ let endpoints = {
    "fetchListCollaborator": (page,page_size,sort_by,order,filter)=> `/collaborator/?page_size=${page_size}&page=${page}&sort_by=${sort_by}&order=${order}${filter}`,
    "fetchCollaboratorByID": (id) => `/collaborator/${id}`,
    "createCollaborator": (id) => `/collaborator/${id}`,
+   "approveCollaborator": (id) => `/collaborator/${id}`,
    "updateCollaborator": (id)=> `/collaborator/${id}`,
    "deleteCollaborator": (id)=> `/collaborator/${id}`,
 

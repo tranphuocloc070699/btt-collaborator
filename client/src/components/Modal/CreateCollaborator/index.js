@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 import Styles from "./create-collaborator.module.css"
 
 
-function CreateCollaboratorModal({ open, setOpenModal,title,collaborator,setCollaborator,onSubmit}) {
+function CreateCollaboratorModal({ open, setOpenModal,title,collaborator,setCollaborator,onSubmit,info}) {
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -20,11 +20,35 @@ function CreateCollaboratorModal({ open, setOpenModal,title,collaborator,setColl
       [key]:val
     })
   }
+
+  const extractAvatarFromArray = (avatar) => {
+ 
+    if (!avatar || !JSON.parse(avatar))
+      return (
+        <div
+          style={{ width: 80, height: 80, backgroundColor: "#dbdbdb" }}
+        ></div>
+      );
+    return (
+      <img
+      style={{ width: 80, height: 80 }}
+        src={`${process.env.BASE_URL_RESOURCE}${
+          JSON.parse(avatar)[0]
+        }`}
+      />
+    );
+  };
   const items = [
     {
       key: '1',
       label: 'Thông tin cá nhân',
       children: <div>
+        <div className={Styles[`create-collaborator-modal__block`]}>
+            {extractAvatarFromArray(info?.avatar)}
+            <p>{info?.full_name}</p>
+        
+            
+        </div>
         <div className={Styles[`create-collaborator-modal__block`]}>
             <p>Title</p>
         <Input
@@ -79,7 +103,7 @@ function CreateCollaboratorModal({ open, setOpenModal,title,collaborator,setColl
     <Modal
       open={open}
       width={600}
-      title={''}
+      title={title}
       footer={false}
       onCancel={() => setOpenModal(false)}
     >

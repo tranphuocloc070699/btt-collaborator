@@ -14,6 +14,8 @@ export const careModeSelector = (state)=> state.careMode?.careMode
 export const listCollaboratorSelector = (state)=> state.collaborator?.listCollaborator
 export const collaboratorSelector = (state)=> state.collaborator?.collaborator
 export const totalItemsOfListCollaboratorSelector = (state) => state.collaborator?.totalItemsOfListCollaborator
+export const listDepartmentSelector = (state) => state.collaborator?.listDepartment
+export const listPositionSelector = (state) => state.collaborator?.listPosition
 
 // Loading
 export const LoadingSelector = (state)=> state.loading?.loading

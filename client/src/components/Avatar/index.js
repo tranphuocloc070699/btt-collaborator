@@ -6,10 +6,18 @@ function AvatarContainer({linkUrl, status}) {
     const [showImage,setShowImage] = useState(false);
     if(linkUrl && linkUrl.length>0){
     }
+
+    const convertStatusColor = () =>{
+        if(!status || status=='NOT_PROPOSED') return '#A1A5B7';
+        if(status=='PROPOSED') return 'yellow';
+        if(status=='ACTIVE') return '#29B171';
+
+    }
+    
     return ( 
         <div>
             <Badge  
-                color={status ? "#29B171" : "#A1A5B7"}
+                color={convertStatusColor()}
                 size="small"
                 count={" "}
                 status={status ? "success" : "warning"} 

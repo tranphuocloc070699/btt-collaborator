@@ -6,6 +6,7 @@ const {
     fetchListCollaborator,
     fetchCollaboratorByID,
     createCollaborator,
+    approveCollaborator,
     updateCollaborator,
     deleteCollaborator,
     fetchDepartmentList,
@@ -20,13 +21,14 @@ const {
 } = require("../controller/collaborator.controller")
 
 collaboratorRouter.get("/",fetchListCollaborator)
-collaboratorRouter.get(`/:id`,fetchCollaboratorByID)
+collaboratorRouter.get(`/single/:id`,fetchCollaboratorByID)
 collaboratorRouter.post("/create/:id",createCollaborator)
+collaboratorRouter.patch("/patch/:id",approveCollaborator)
 collaboratorRouter.put(`/update/:id`,updateCollaborator)
 collaboratorRouter.delete(`/delete/:id`,deleteCollaborator)
 
-collaboratorRouter.get(`/department-list`,fetchDepartmentList)
-collaboratorRouter.get(`/position-list`,fetchPositionlist)
+collaboratorRouter.get("/department-list",fetchDepartmentList)
+collaboratorRouter.get(`/position-list/`,fetchPositionlist)
 
 collaboratorRouter.post("/create/field/:id",pushToCollaborativeField)
 collaboratorRouter.post("/create/content/:id",pushToCollaborativeContent)
