@@ -50,7 +50,7 @@ function App() {
         <Provider store={store}>
           <ToastContainer basename="/" />
           <BrowserRouter>
-            <div id={"party-service"}>
+            <div id={"collaborator-service"}>
               {HandelRouter()}
             </div>
           </BrowserRouter>

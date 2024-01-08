@@ -1,5 +1,5 @@
 FROM node:18-alpine
-WORKDIR /var/www/html/party_service
+WORKDIR /var/www/html/collaborator_service
 
 
 COPY . .

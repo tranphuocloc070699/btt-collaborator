@@ -34,7 +34,7 @@ export const getHeaderToken = (req)=>{
 }
 
 export const CheckMicroFrontEnd = ()=>{
-    return window.location.href.includes("erp") ? "/party" : ""
+    return window.location.href.includes("erp") ? "/collaborator" : ""
 }
 
 
