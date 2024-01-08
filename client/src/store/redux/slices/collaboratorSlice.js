@@ -13,6 +13,10 @@ const collaboratorSlice = createSlice({
     setListCollaborator: (state, action) => {
         state.listCollaborator = action.payload;
     },
+    pushToListCollaborator: (state,action) =>{
+      
+      state.listCollaborator.push(action.payload);
+    },
     changeItemPropertyListCollaborator: (state,action) =>{
       /* 
       input: {
@@ -67,6 +71,7 @@ export const {
     setListDepartment,
     setListPosition,
     changeItemPropertyListCollaborator,
+    pushToListCollaborator,
     setTotalItemsOfListCollaborator,
     fetchListCollaboratorTrigger,
     fetchCollaboratorTrigger,

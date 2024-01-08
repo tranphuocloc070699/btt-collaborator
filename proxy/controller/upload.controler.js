@@ -50,7 +50,7 @@ const uploadFiles  = async (req,res)=>{
                 const formData = new FormData()
                 let { authorization } = req.headers
 
-                console.log(authorization);
+                // console.log(process.env.BASE_URL_RESOURCE);
                 for (const file of req.files) {
                     formData.append("files", fs.readFileSync(file?.path), file?.filename);
                 }

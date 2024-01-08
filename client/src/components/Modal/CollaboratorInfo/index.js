@@ -13,7 +13,7 @@ function CollaboratorInfoModal({ open, setOpenModal, collaborator }) {
   const dispatch = useDispatch();
   const location = useLocation();
   const extractAvatarFromArray = () => {
-    if (!collaborator?.avatar || !JSON.parse(collaborator?.avatar))
+    if (!collaborator?.avatar)
       return (
         <div
           style={{ width: 80, height: 80, backgroundColor: "#dbdbdb" }}
@@ -22,9 +22,7 @@ function CollaboratorInfoModal({ open, setOpenModal, collaborator }) {
     return (
       <img
         className={Styles[`collaborator-info-modal__body__top__image`]}
-        src={`${process.env.BASE_URL_RESOURCE}${
-          JSON.parse(collaborator?.avatar)[0]
-        }`}
+        src={`${process.env.BASE_URL_RESOURCE}${collaborator?.avatar}`}
       />
     );
   };
@@ -85,7 +83,7 @@ function CollaboratorInfoModal({ open, setOpenModal, collaborator }) {
                     </span>
                   </p>
                 </div>
-                {/* gender and email */}
+                {/* title gender and email */}
                 <div
                   className={
                     Styles[`collaborator-info-modal__body__top__info__block`]
@@ -113,7 +111,7 @@ function CollaboratorInfoModal({ open, setOpenModal, collaborator }) {
                         ]
                       }
                     >
-                      {collaborator?.dep_pos[0]?.position?.pos_name}
+                      {collaborator?.title}
                     </p>
                   </div>
                   <div
@@ -138,7 +136,7 @@ function CollaboratorInfoModal({ open, setOpenModal, collaborator }) {
                         ]
                       }
                     >
-                      {collaborator?.gender == 1 ? "Nam" : "Nữ"}
+                      {collaborator?.gender == 1 ? "Nam" : collaborator?.gender==0 ?"Nữ" : "Khác"}
                     </p>
                   </div>
                   <div
@@ -225,7 +223,7 @@ function CollaboratorInfoModal({ open, setOpenModal, collaborator }) {
                     ]
                   }
                 >
-                  {collaborator?.dep_pos[0]?.position?.pos_name}
+                  {collaborator?.position}
                 </div>
               </div>
               {/* Workplace */}
@@ -329,6 +327,7 @@ function CollaboratorInfoModal({ open, setOpenModal, collaborator }) {
                       ]
                     }
                   >
+                  
                     {collaborator?.fields?.length > 0 &&
                       collaborator?.fields.map((item, index) => (
                         <p
@@ -339,7 +338,7 @@ function CollaboratorInfoModal({ open, setOpenModal, collaborator }) {
                             ]
                           }
                         >
-                          {item.field}
+                          {item}
                         </p>
                       ))}
                   </div>
@@ -381,7 +380,7 @@ function CollaboratorInfoModal({ open, setOpenModal, collaborator }) {
                             ]
                           }
                         >
-                          {item.field}
+                          {item}
                         </p>
                       ))}
                   </div>
@@ -424,7 +423,7 @@ function CollaboratorInfoModal({ open, setOpenModal, collaborator }) {
                             ]
                           }
                         >
-                          {item.field}
+                          {item}
                         </p>
                       ))}
                   </div>

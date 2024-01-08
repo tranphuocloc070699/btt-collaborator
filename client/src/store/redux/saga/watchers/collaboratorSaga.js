@@ -6,6 +6,7 @@ import {
     setListDepartment,
     setListPosition,
     changeItemPropertyListCollaborator,
+    pushToListCollaborator,
     setTotalItemsOfListCollaborator,
     fetchListCollaboratorTrigger,
     fetchCollaboratorTrigger,
@@ -50,27 +51,32 @@ function* handleFetchListCollaborator(payload) {
         yield put(setListCollaborator(result?.data))
         
         yield put(setTotalItemsOfListCollaborator(result?.metadata?.total_items))
-        // if(payload.setLoading){
-        //     payload.setLoading()
-        // }
+
     }else{
         ErrorNotification("Không lấy được dữ liệu")
+        
+    }
+    if(payload.setLoading){
+        payload.setLoading(false)
     }
 }
 
 function* handleFetchCollaborator(payload){
     const result = yield call(fetchCollaboratorByID_API,payload?.data)
     if(result.code === "200"){
-        // yield put(setAssetDeclarationByID(result?.data))
         yield put(setCollaborator(result?.data))
         if(payload.setOpen){
             payload.setOpen(true)
         }
+
     }else{
         ErrorNotification("Không lấy được dữ liệu")
         if(payload.setOpen){
             payload.setOpen(false)
-        }
+        }  
+    }
+    if(payload.setLoading){
+        payload.setLoading(false)
     }
 }
 
@@ -80,15 +86,14 @@ function* handleCreateCollaborator(payload) {
     
     const result = yield call(createCollaborator_API,payload?.data)
     console.log({result})
-    if(result?.code === "200" && result?.data){
-        // yield put(setCreateAssetDeclaration(result?.data))
-        // yield put(setLoading(true))
-        yield put(changeItemPropertyListCollaborator({
-            id:result?.data?.id,
-            data:{
-                state:result?.data?.state
-            }
-        }))
+    if(result?.code === "200"){
+        // yield put(changeItemPropertyListCollaborator({
+        //     id:result?.data?.id,
+        //     data:{
+        //         state:result?.data?.state
+        //     }
+        // }))
+        yield put(pushToListCollaborator(result?.data))
         if(payload.setOpen){
             payload.setOpen(false);
         }
@@ -96,13 +101,15 @@ function* handleCreateCollaborator(payload) {
     }else{
         ErrorNotification("Đề xuất không thành công")
     }
+    if(payload.setLoading){
+        payload.setLoading(false)
+    }
 }
 
 function* handleApproveCollaborator(payload) {
     
     const result = yield call(approveCollaborator_API,payload?.data)
-    console.log({result})
-    if(result?.code === "200" && result?.data){
+    if(result?.code === "200"){
         yield put(changeItemPropertyListCollaborator({
             id:result?.data?.id,
             data:{
@@ -117,6 +124,9 @@ function* handleApproveCollaborator(payload) {
     }else{
         ErrorNotification("Duyệt Đề xuất không thành công")
     }
+    if(payload.setLoading){
+        payload.setLoading(false)
+    }
 }
 
 
@@ -125,11 +135,7 @@ function* handleUpdateCollaborator(payload){
     if(result.code === "200"){
         yield put(changeItemPropertyListCollaborator({
             id:payload?.data?.id,
-            data:{
-                workplace:payload?.data.workplace,
-                title:payload?.data.title,
-                other_social:payload?.data.other_social
-            }
+            data:payload?.data
         }))
         if(payload.setOpen){
             payload.setOpen(false);
@@ -137,6 +143,9 @@ function* handleUpdateCollaborator(payload){
         SuccessNotification("Chỉnh sửa thành công")
     }else{
         ErrorNotification("Không lấy được dữ liệu")
+    }
+    if(payload.setLoading){
+        payload.setLoading(false)
     }
 }
 
@@ -159,13 +168,14 @@ function* handleDeleteCollaborator(payload){
     }else{
         ErrorNotification("Không lấy được dữ liệu")
     }
+    if(payload.setLoading){
+        payload.setLoading(false)
+    }
 }
 
 function* handleFetchListDepartment(payload) {
     const result = yield call(fetchDepartmentList_API,payload?.data)
     if(result?.code === "200" && result?.data){
-        // yield put(setAssetDeclarationList(result?.data))
-        // yield put(setLoading(true))
         const data = result?.data.map(item => {
             return {
                 value:item,
@@ -176,13 +186,14 @@ function* handleFetchListDepartment(payload) {
     }else{
         ErrorNotification("Không lấy được dữ liệu")
     }
+    if(payload.setLoading){
+        payload.setLoading(false)
+    }
 }
 
 function* handleFetchListPosition(payload) {
     const result = yield call(fetchPositionlist_API,payload?.data)
     if(result?.code === "200" && result?.data){
-        // yield put(setAssetDeclarationList(result?.data))
-        // yield put(setLoading(true))
         const data = result?.data.map(item => {
             return {
                 value:item,
@@ -192,6 +203,9 @@ function* handleFetchListPosition(payload) {
         yield put(setListPosition(data))
     }else{
         ErrorNotification("Không lấy được dữ liệu")
+    }
+    if(payload.setLoading){
+        payload.setLoading(false)
     }
 }
 

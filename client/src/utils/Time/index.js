@@ -1,6 +1,6 @@
 // Custom thời gian tương thích với DatePiker of Antd
 
-export const FromatDatePiker = (date = "19-09-2000", whereToCut = "-" , noReverse)=>{
+export const FormatDatePiker = (date = "19-09-2000", whereToCut = "-" , noReverse)=>{
     if(noReverse){
         return `${date}T00:00:00`
     }else{

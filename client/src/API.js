@@ -45,7 +45,8 @@ export let endpoints = {
     // filter: full_name,dep_names,pos_names,workplace
     "fetchListCollaborator": (page,page_size,sort_by,order,filter)=> `/api/collaborator/?page_size=${page_size}&page=${page}&sort_by=${sort_by}&order=${order}${filter}`,
     "fetchCollaboratorByID": (id) => `/api/collaborator/single/${id}`,
-    "createCollaborator": (id) => `/api/collaborator/create/${id}`,
+    // "createCollaborator": (id) => `/api/collaborator/create/${id}`,
+    "createCollaborator": `/api/collaborator/create`,
     "approveCollaborator": (id) => `/api/collaborator/patch/${id}`,
     "updateCollaborator": (id)=> `/api/collaborator/update/${id}`,
     "deleteCollaborator": (id)=> `/api/collaborator/delete/${id}`,
@@ -75,7 +76,7 @@ export let headers = {
         "Content-Type": "application/json",
     },
     headers_token: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNzQ4OTc5NzA5fQ.7e8yPTL-Sxx1qpD7jIxtvFC0QvaKD9HtJu696d2xFRs`,
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoyNzQ5Nzk2MTk2fQ.2i_z3-2cpRRXusvpR-T5h0QvclOi4gL8wq1ze-aLyAA`,
         "Content-Type": "application/json",
         token:generateToken()
     }

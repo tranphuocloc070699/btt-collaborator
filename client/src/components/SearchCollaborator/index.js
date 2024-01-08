@@ -18,18 +18,18 @@ function SearchCollaborator({setSearch, search,onSearch}) {
     
 
     useEffect(() =>{
-        dispatch({
-            type:fetchDepartmentListTrigger.type,
-            data:{
-                dep_names:''
-            }
-        })
-        dispatch({
-            type:fetchPositionListTrigger.type,
-            data:{
-                pos_names:''
-            }
-        })
+        // dispatch({
+        //     type:fetchDepartmentListTrigger.type,
+        //     data:{
+        //         dep_names:''
+        //     }
+        // })
+        // dispatch({
+        //     type:fetchPositionListTrigger.type,
+        //     data:{
+        //         pos_names:''
+        //     }
+        // })
     },[])
 
 
@@ -45,7 +45,21 @@ function SearchCollaborator({setSearch, search,onSearch}) {
                         onChange={(e)=>setSearch({...search, full_name: e.target.value || "" })}
                     />
                 </div>
-                <div className={Styles["search_pb"]}>
+                <div className={Styles["search_name"]}>
+                    <Input
+                        maxLength={30}
+                        placeholder="Chức danh/Chức vụ"
+                        onChange={(e)=>setSearch({...search, position: e.target.value || "" })}
+                    />
+                </div>
+                <div className={Styles["search_name"]}>
+                    <Input
+                        maxLength={30}
+                        placeholder="Nơi công tác"
+                        onChange={(e)=>setSearch({...search, workplace: e.target.value || "" })}
+                    />
+                </div>
+                {/* <div className={Styles["search_pb"]}>
                     <Select
                         allowClear
                         showSearch
@@ -57,6 +71,7 @@ function SearchCollaborator({setSearch, search,onSearch}) {
                             setSearch({...search, dep_names: value || "" })
                         }}
                     />
+  
                 </div>
                 <div className={Styles["search_pb"]}>
                     <Select
@@ -84,7 +99,7 @@ function SearchCollaborator({setSearch, search,onSearch}) {
                         }
                         onChange={(value)=>{setSearch({...search, workplace: value || "" })}}
                     />
-                </div>
+                </div> */}
            </div>
            <div className={Styles["box_search_out"]}>
                 <Button 

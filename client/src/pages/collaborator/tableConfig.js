@@ -14,7 +14,7 @@ export const columns = (OnChangeDetailsPage) => {
     if (!state) return <div></div>;
 
     if (state == "NOT_PROPOSED")
-      return <div style={{ color: "#dbdbdb" }}>Chưa đề xuất</div>;
+      return <div style={{ color: "#dbdbdb" }}>Vô hiệu hóa</div>;
     if (state == "PROPOSED")
       return <div style={{ color: "orange" }}>Đang chờ duyệt</div>;
     if (state == "ACTIVE")
@@ -37,7 +37,7 @@ export const columns = (OnChangeDetailsPage) => {
           <div className={Styles["colunm_flex"]}>
             <AvatarContainer
               linkUrl={
-                record?.avatar ? extractAvatarFromArray(record?.avatar) : ""
+                record?.avatar ? record?.avatar : ""
               }
               status={record?.state}
             />
@@ -47,10 +47,10 @@ export const columns = (OnChangeDetailsPage) => {
       },
     },
     {
-      width: "5%",
+      width: "8%",
       title: <span className={Styles["table_header"]}>Giới tính</span>,
       render: (_, record) => {
-        return <div>{record?.gender=='1' ? 'Nam' : 'Nữ'}</div>;
+        return <div>{record?.gender=='1' ? 'Nam' : record.gender=='0' ? 'Nữ' : 'Khác'}</div>;
       },
     },
     {
@@ -70,10 +70,13 @@ export const columns = (OnChangeDetailsPage) => {
 
         // const ListData = ListDep(record?.dep_pos);
         return (
-          <div>
-            <p>{record?.dep_pos[0]?.position?.pos_name}</p>
-            <p style={{color:'#A1A5B7',marginTop:4}}>{record?.dep_pos[0]?.department_name}</p>
-          </div>
+          // <div>
+          //   <p>{record?.dep_pos[0]?.position?.pos_name}</p>
+          //   <p style={{color:'#A1A5B7',marginTop:4}}>{record?.dep_pos[0]?.department_name}</p>
+          // </div>
+          <div>{record?.position}
+
+        </div>
         );
       },
     },

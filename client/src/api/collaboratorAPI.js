@@ -8,13 +8,12 @@ export function fetchListCollaborator_API(payload) {
       sort_by,
       order,
       full_name,
-      dep_names,
-      pos_names,
+      position,
       workplace,
     } = payload;
 
     let filter = "";
-    const array = [{ full_name }, { dep_names }, { pos_names }, { workplace }];
+    const array = [{ full_name }, { position}, { workplace }];
 
     array.forEach((item, index) => {
       const key = Object.keys(item)[0];
@@ -24,7 +23,7 @@ export function fetchListCollaborator_API(payload) {
         filter+=`&${key}=${item[key]}`;
       }
     });
-  
+   
     return API.get(
       endpoints["fetchListCollaborator"](page, page_size, sort_by, order,filter),
       { headers: headers.headers_token }
@@ -60,7 +59,7 @@ export function fetchCollaboratorByID_API(payload) {
 export function createCollaborator_API(payload) {
   try {
     const { id, ...data } = payload;
-    return API.post(endpoints["createCollaborator"](id), data, {
+    return API.post(endpoints["createCollaborator"], data, {
       headers: headers.headers_token,
     })
       .then((res) => {
@@ -77,7 +76,7 @@ export function createCollaborator_API(payload) {
 export function approveCollaborator_API(payload) {
   try {
     const { id } = payload;
-    return API.patch(endpoints["approveCollaborator"](id), {
+    return API.patch(endpoints["approveCollaborator"](id),{}, {
       headers: headers.headers_token,
     })
       .then((res) => {

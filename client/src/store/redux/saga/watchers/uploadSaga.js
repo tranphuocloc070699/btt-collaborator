@@ -1,5 +1,5 @@
 import { call, fork, put, takeLatest } from "redux-saga/effects"
-import { getUpload, setUpload } from "../../slices/uploadSlice"
+import { getUpload, setUpload,emptyUploadTrigger } from "../../slices/uploadSlice"
 import { getUploadAPI } from "../../../../api/uploadAPI";
 import { ErrorNotification, SuccessNotification } from "../../../../utils/Notification";
 
@@ -13,9 +13,15 @@ function* handleGetUpload(payload) {
     }
 }
 
+function* handleEmptyUpload(payload) {
+    setUpload([])
+}
+
+
 function* onHandleRootUpload() {
 
     yield takeLatest(getUpload.type, handleGetUpload)
+    yield takeLatest(emptyUploadTrigger.type, handleEmptyUpload)
 }
 
 export const uploadSaga = [fork(onHandleRootUpload)]

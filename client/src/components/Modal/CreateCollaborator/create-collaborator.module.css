@@ -2,8 +2,47 @@
     display: flex;
     align-items: center;
     padding: 16px;
-    justify-content: space-between;
-    
+}
+.create-collaborator-modal__block p{
+    width: 180px;
+}
+.create-collaborator-modal__block__avatar{
+    width: 80px;
+    height: 80px;
+    border-radius: 6px;
+    background-color: #dbdbdb;
+    position: relative;
+}
+.create-collaborator-modal__block__avatar img{
+    width: 80px;
+    height: 80px;
+    border-radius: 6px;
+}
+.create-collaborator-modal__block__uploader{
+    position: absolute;
+    top: -13%;
+    right: -13%;
+    cursor: pointer;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    box-shadow: 0px 0px 2px 0px #00000040;
+}
+.create-collaborator-modal__block__uploader__icon{
+    width: 20px !important;
+    height: 20px !important;
+}
+.create-collaborator-modal__block__uploader__input{
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
 }
 .profile-status-modal-body__block__input{
     height:44px ;
@@ -14,6 +53,25 @@
     border-radius: 0px;
     border: none;
     outline: none;
+    
+}
+
+.profile-status-modal-body__block__select{
+    width: 100%;
+    margin-left: 20px;
+    max-width: 340px;
+    background: #F3F6F9 ;
+    border-radius: 0px;
+    height: 44px;
+    border: none ;
+    outline: none ;
+
+    
+}
+.profile-status-modal-body__block__select div{
+    border: none !important;
+    outline: none !important;
+    background: #F3F6F9 !important;
 }
 
 .create-collaborator-modal__footer{

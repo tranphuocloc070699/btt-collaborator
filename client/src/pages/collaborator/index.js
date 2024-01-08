@@ -13,11 +13,11 @@ import {
   FormOutlined,
   InfoCircleOutlined,
 } from "@ant-design/icons";
-
+import { emptyUploadTrigger } from "../../store/redux/slices/uploadSlice"
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-
+import moment from "moment"
 import {
   fetchListCollaboratorTrigger,
   fetchCollaboratorTrigger,
@@ -37,10 +37,12 @@ import {
 import CreateCollaboratorModal from "../../components/Modal/CreateCollaborator";
 import CollaboratorInfoModal from "../../components/Modal/CollaboratorInfo";
 import ApproveProposalModal from "../../components/Modal/ApproveProposal";
-import Loadding from "../../components/Loading/LoadingComponient";
+import LoadingComponent from "../../components/Loading/LoadingComponent";
 import { CheckMicroFrontEnd } from "../../utils/Token";
 import SearchCollaborator from "../../components/SearchCollaborator";
-
+import {
+  UploadSelector
+} from "../../store/redux/selecters";
 function Collaborator() {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
@@ -50,7 +52,8 @@ function Collaborator() {
     type: "",
   });
   const [infoModalOpen, setInfoModalOpen] = useState(false);
-
+  const [globalLoading, setGlobalLoading] = useState(false);
+  const uploadList = useSelector(UploadSelector)
   const [page, setPage] = useState({
     page: 1,
     page_size: 10,
@@ -60,17 +63,26 @@ function Collaborator() {
   const [pageNumber, setPageNumber] = useState(10);
   const [search, setSearch] = useState({
     full_name: "",
-    dep_names: "",
-    pos_names: "",
+    position: "",
     workplace: "",
-    is_collaborator: true,
   });
 
   const [upsaveCollaborator, setUpsaveCollaborator] = useState({
-    title: "",
-    workplace: "",
-    other_social: "",
-    id: null,
+    id:  null,
+    avatar: '',
+    title: '',
+    workplace: '',
+    full_name: '',
+    gender: 0,
+    birth_day: '',
+    resident: '',
+    phone: '',
+    email: '',
+    other_social: '',
+    position: '',
+    fields: [],
+    contents: [],
+    care_modes: []
   });
   const [upsaveInfo, setUpsaveInfo] = useState({
     avatar: "",
@@ -92,26 +104,46 @@ function Collaborator() {
     });
   };
 
+//   const mapNumToGender = (num) => {
+//     const arr = ['Nữ','Nam','Khác']
+//     return arr[num];
+//   }
+//   const mapGenderToNum = (gender) =>{
+  
+//     const arr = ['Nữ','Nam','Khác']
+//   const index = arr.findIndex(item => item==gender);
+
+//     return index
+// }
+
   const onUpsaveSubmit = (type) => {
-    console.log({ type });
-    console.log({ upsaveCollaborator });
+
+
+
+    setGlobalLoading(true)
     if (type == "ĐỀ XUẤT") {
       const data = {
         ...upsaveCollaborator,
+        avatar:uploadList[0]
+       
       };
+
       dispatch({
         type: createCollaboratorTrigger.type,
         data,
         setOpen: setOpen,
+        setLoading:setGlobalLoading
       });
     } else if (type == "CHỈNH SỬA") {
       const data = {
         ...upsaveCollaborator,
+        ...(uploadList.length > 0 && {avatar:uploadList[0]})
       };
       dispatch({
         type: updateCollaboratorTrigger.type,
         data,
         setOpen: setOpen,
+        setLoading:setGlobalLoading
       });
     }
 
@@ -123,6 +155,7 @@ function Collaborator() {
   };
 
   const onConfirmModalSubmit = () => {
+    setGlobalLoading(true)
     if (confirmModal.type == "APPROVE") {
       dispatch({
         type: approveCollaboratorTrigger.type,
@@ -130,6 +163,7 @@ function Collaborator() {
           id: upsaveCollaborator?.id
   
         },
+        setLoading:setGlobalLoading
       });
 
       setConfirmModal({
@@ -142,6 +176,7 @@ function Collaborator() {
         data: {
           id: upsaveCollaborator?.id,
         },
+        setLoading:setGlobalLoading
       });
     }
     setConfirmModal({
@@ -157,7 +192,7 @@ function Collaborator() {
   }, [page]);
 
   const fetchData = () => {
-    console.log({ search });
+    setGlobalLoading(true)
     const query = {
       ...page,
       ...search,
@@ -165,19 +200,31 @@ function Collaborator() {
     dispatch({
       type: fetchListCollaboratorTrigger.type,
       data: query,
+      setLoading:setGlobalLoading
     });
   };
 
   const onContextMenu = (record) => {
-    setUpsaveInfo({
-      avatar: record?.avatar,
-      full_name: record?.full_name,
-    });
+    // setUpsaveInfo({
+    //   avatar: record?.avatar,
+    //   full_name: record?.full_name,
+    // });
     setUpsaveCollaborator({
+      id: record?.id || null,
+      avatar: record?.avatar,
       title: record?.title,
       workplace: record?.workplace,
+      full_name: record?.full_name,
+      gender: record?.gender,
+      birth_day: record?.birth_day,
+      resident: record?.resident,
+      phone: record?.phone,
+      email: record?.email,
       other_social: record?.other_social,
-      id: record?.id,
+      position: record?.position,
+      fields: record?.fields,
+      contents: record?.contents,
+      care_modes: record?.care_modes
     });
     switch (record?.state) {
       case "NOT_PROPOSED":
@@ -187,29 +234,30 @@ function Collaborator() {
             key: 0,
             icon: <InfoCircleOutlined />,
             onClick: (e) => {
-              console.log({record})
+        
               dispatch({
                 type: fetchCollaboratorTrigger.type,
                 data: {
                   id: record?.id,
                 },
                 setOpen: setInfoModalOpen,
+                setLoading:setGlobalLoading
               });
             },
           },
-          {
-            label: "Đề xuất",
-            key: 1,
-            icon: <FormOutlined />,
+          // {
+          //   label: "Đề xuất",
+          //   key: 1,
+          //   icon: <FormOutlined />,
       
-            onClick: (e) => {
-              setUpsaveInfo({
-                ...upsaveInfo,
-                title: "ĐỀ XUẤT",
-              });
-              setOpen(true);
-            },
-          },
+          //   onClick: (e) => {
+          //     setUpsaveInfo({
+          //       ...upsaveInfo,
+          //       title: "ĐỀ XUẤT",
+          //     });
+          //     setOpen(true);
+          //   },
+          // },
         ])
         break;
       case "PROPOSED":
@@ -225,6 +273,7 @@ function Collaborator() {
                   id: record?.id,
                 },
                 setOpen: setInfoModalOpen,
+                setLoading:setGlobalLoading
               });
             }},
             {
@@ -256,6 +305,7 @@ function Collaborator() {
                   id: record?.id,
                 },
                 setOpen: setInfoModalOpen,
+                setLoading:setGlobalLoading
               });
             }},
             {
@@ -291,17 +341,46 @@ function Collaborator() {
     }
   };
 
+  const onCreateCollaboratorModalOpen = (value) =>{
+    setUpsaveInfo({
+      ...upsaveInfo,
+      title:'ĐỀ XUẤT'
+    })
+    setUpsaveCollaborator({
+      id:null,
+      avatar: '',
+      title: '',
+      workplace: '',
+      full_name: '',
+      gender: 0,
+      birth_day: '',
+      resident: '',
+      phone: '',
+      email: '',
+      other_social: '',
+      position: '',
+      fields: [],
+      contents: [],
+      care_modes: []
+    })
+    dispatch({
+      type:emptyUploadTrigger.type,
+      payload:null
+    })
+    setOpen(value)
+  }
+
   return (
     <div className={Styles["party_Sentiment"]}>
+      <LoadingComponent loading={globalLoading}/>
       <Title
         title={"Quản lý cộng tác viên chuyên gia - chuyên viên"}
-        setOpen={setOpen}
-        addButton={false}
+        setOpen={onCreateCollaboratorModalOpen}
+        addButton={true}
       />
       <CreateCollaboratorModal
         setOpenModal={setOpen}
         open={open}
-        title={upsaveInfo.title}
         collaborator={upsaveCollaborator}
         setCollaborator={setUpsaveCollaborator}
         info={upsaveInfo}
@@ -346,6 +425,7 @@ function Collaborator() {
                     onClick: (event) => {}, // click row
                     onDoubleClick: (event) => {}, // double click row
                     onContextMenu: (event) => {
+            
                       onContextMenu(record);
                     }, // right button click row
                     onMouseEnter: (event) => {}, // mouse enter row
@@ -368,12 +448,12 @@ function Collaborator() {
                     return `Hiển thị ${total} trong ${total}`;
                   },
                   onChange: (page, pageNumber) => {
-                    console.log({ pageNumber });
+           
                     setPageNumber(pageNumber);
                   },
                 }}
                 onChange={(pageOption) => {
-                  console.log({ pageOption });
+             
                   setPage({
                     ...page,
                     page_size: pageOption.pageSize,

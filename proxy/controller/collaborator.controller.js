@@ -4,9 +4,9 @@ const { API, endpoints } = require("../API");
 
 
 const fetchListCollaborator = (req, res) => {
-  const {page,page_size,sort_by,order,full_name,dep_names,pos_names,workplace} = req.query
+  const {page,page_size,sort_by,order,full_name,position,workplace} = req.query
     let filter = "";
-    const array = [{full_name},{dep_names},{pos_names},{workplace}];
+    const array = [{full_name},{position},{workplace}];
 
     array.forEach((item,index) =>{
         const key = Object.keys(item)[0];
@@ -53,15 +53,15 @@ const fetchCollaboratorByID = (req, res) => {
 
 const createCollaborator = (req, res) => {
   try {
-    const {id} = req.params;
     API.post(
-        endpoints["createCollaborator"](id),req.body,
+        endpoints["createCollaborator"],req.body,
         getHeaderToken(req)
       )
         .then((response) => {
           res.send(response.data);
         })
         .catch((error) => {
+
           res.send(error);
         });
   } catch (error) {
@@ -72,8 +72,9 @@ const createCollaborator = (req, res) => {
 const approveCollaborator = (req, res) => {
   try {
     const {id} = req.params;
+    // console.log(getHeaderToken(req))
     API.patch(
-        endpoints["approveCollaborator"](id),
+        endpoints["approveCollaborator"](id),{},
         getHeaderToken(req)
       )
         .then((response) => {

@@ -26,7 +26,7 @@ function ApproveProposalModal({ title,onSubmit,openModal,setOpenModal}) {
       <div className={`${Styles['approve-proposal-container']}`}>
           <h2 className={`${Styles['approve-proposal-title']}`}>{title}</h2>
           <div className={Styles['approve-proposal-footer']}> 
-            <button className={`${Styles['approve-proposal-footer-btn']} ${Styles['cancel']}`} onClick={() => () => setOpenModal(false)}>
+            <button className={`${Styles['approve-proposal-footer-btn']} ${Styles['cancel']}`} onClick={()  => setOpenModal(false)}>
               Quay lại
             </button>
             <button className={`${Styles['approve-proposal-footer-btn']} ${Styles['submit']}`} onClick={() => onSubmit()}>

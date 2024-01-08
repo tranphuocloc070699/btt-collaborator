@@ -22,7 +22,7 @@ const {
 
 collaboratorRouter.get("/",fetchListCollaborator)
 collaboratorRouter.get(`/single/:id`,fetchCollaboratorByID)
-collaboratorRouter.post("/create/:id",createCollaborator)
+collaboratorRouter.post("/create",createCollaborator)
 collaboratorRouter.patch("/patch/:id",approveCollaborator)
 collaboratorRouter.put(`/update/:id`,updateCollaborator)
 collaboratorRouter.delete(`/delete/:id`,deleteCollaborator)

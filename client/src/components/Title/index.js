@@ -4,7 +4,7 @@ import Styles from "./title.module.css"
 import { Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons"
 
-function Title({title, addButton=false, setOpen={setOpen}}) {
+function Title({title, addButton=false, setOpen}) {
     return ( 
         <div className={Styles["box_title"]}>
             <div className={Styles["box-box"]}>
